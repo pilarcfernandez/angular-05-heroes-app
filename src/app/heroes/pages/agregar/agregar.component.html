@@ -1,0 +1,58 @@
+<h1> {{ ( heroe.id )? 'Editar' : 'Nuevo' }} héroe</h1>
+<mat-divider></mat-divider>
+
+<div fxLayout="row" fxLayoutGap="40px" fxflex="100" fxLayout.sm="column" fxLayout.xs="column">
+    <div fxflex="50" fxLayout="column">
+        <div fxLayout="row" fxLayoutGap="20px" fxLayout.xs="column" fxLayout.sm="column">
+            <mat-form-field fxFlex="100" fxLayout.xs="column" name="superhero" >
+                <mat-label>Super héroe</mat-label>
+                <input matInput type="text" [(ngModel)]="heroe.superhero" required>
+            </mat-form-field>
+            <mat-form-field fxFlex="100" fxLayout.xs="column" name="alter_ego" >
+                <mat-label>Alter ego</mat-label>
+                <input matInput type="text" [(ngModel)]="heroe.alter_ego" required>
+            </mat-form-field>
+        </div>
+        <mat-form-field fxFlex="100" name="first_appearance">
+            <mat-label>Primera aparición</mat-label>
+            <input matInput type="text" [(ngModel)]="heroe.first_appearance" required>
+        </mat-form-field>
+        <mat-form-field fxFlex="100"  name="characters">
+            <mat-label>Personajes</mat-label>
+            <input matInput type="text" [(ngModel)]="heroe.characters">
+        </mat-form-field>
+        <mat-form-field fxFlex="100"  name="publisher">
+            <mat-label>Creador</mat-label>
+            <mat-select [(ngModel)]="heroe.publisher" required>
+                <mat-option *ngFor="let publisher of publishers"
+                            [value]="publisher.id">
+                    {{ publisher.desc }}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field fxFlex="100"  name="alt_image">
+            <mat-label>Foto url</mat-label>
+            <input matInput type="url" [(ngModel)]="heroe.alt_image">
+        </mat-form-field>
+
+        <br>
+        <div fxLayout="row" fxLayoutGap="20px" fxLayout.xs="column">
+            <button mat-raised-button color="primary" (click)="guardarHeroe()">
+                <mat-icon>save</mat-icon>Guardar
+            </button>
+            <span class="spacer"></span>
+            <button mat-raised-button color="primary" color="warn" (click)="borrarHeroe()" *ngIf="heroe.id" >
+                <mat-icon>delete</mat-icon>Borrar
+            </button>
+            <!--
+            <span class="spacer"></span>
+            <button mat-raised-button color="primary" color="warn" routerLink="['./listado']">
+                <mat-icon>back</mat-icon>Volver
+            </button>
+            -->
+        </div>
+    </div>
+    <div fxflex="50">
+        <img [src]="heroe | imagen">
+    </div>
+</div>
